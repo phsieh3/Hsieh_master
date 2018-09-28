@@ -1,0 +1,128 @@
+---
+title: "Hsieh_master"
+author: "Pei Yang Hsieh"
+date: 2018-09-28
+output: html_document
+---
+
+## Load libraries
+
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+## Outputs
+
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    
+output:
+  pdf_document: default
+  
+output:
+  word_document: default
+
+## Formatting
+
+Text formatting 
+------------------------------------------------------------
+
+*italic*  or  _italic_
+**bold**  or  __bold__
+`code`
+superscript^2^ and subscript~2~
+
+
+Headings
+------------------------------------------------------------
+
+# 1st Level Header
+
+## 2nd Level Header
+
+### 3rd Level Header
+
+Lists
+------------------------------------------------------------
+
+*   Bulleted list item 1
+
+*   Item 2
+
+    * Item 2a
+
+    * Item 2b
+
+1.  Numbered list item 1
+
+1.  Item 2. The numbers are incremented automatically in the output.
+
+
+Tables 
+------------------------------------------------------------
+
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell 
+
+
+
+'eval = FALSE' : code will be displayed but not executed; results are not included.
+
+'echo = FALSE' : code will be executed but not displayed; results are included.
+
+'include = FALSE' : code will be executed but not displayed; results are not included.
+
+'message = FALSE' and 'warning = FALSE' : prevents messages and warnings from being displayed.
+
+'results = hide' and 'fig.show = hide' : prevents results and figures from being shown, respectively.
+
+'collapse = TRUE' : output will be collapsed into a single block at shown at the end of the chunk.
+
+'error' : errors in code will stop rendering when FALSE; errors in code will be printed in the doc when TRUE. The default is FALSE and you should almost never change it.
+
+## Building Blocks
+
+```{r building_blocks}
+
+#Create random uniform distribution
+x = runif(20)
+x
+mean(x)
+var(x)
+
+#Data frame of random sample
+
+example_df = tibble(
+  vec_numeric = 5:8,
+  vec_char = c("My", "name", "is", "Jeff"),
+  vec_logical = c(TRUE, TRUE, TRUE, FALSE),
+  vec_factor = factor(c("male", "male", "female", "female"))
+)
+
+class(example_df$vec_numeric)
+```
+
+## Plotting
+
+```{r plot}
+
+set.seed(1)
+
+plot_df = tibble(
+  x = rnorm(1000, sd = .5),
+  y = 1 + 2 * x + rnorm(1000)
+)
+
+#histogram
+ggplot(plot_df, aes(x = x)) + geom_histogram()
+
+#scatterplot of x and y
+ggplot(plot_df, aes(x = x, y = y)) + geom_point()
+
+ggsave("scatter_plot.pdf", height = 4, width = 6)
+```
+
